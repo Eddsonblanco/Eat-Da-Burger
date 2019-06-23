@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="container">
+        <img class="center" src="" alt="burguer pic">
+        <p class="lead">Add your own custom burger or click a devour button to eat one from our prepared menu.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Left side (ready to eat) -->
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <h4 class="red-text">Ready to eat!</h4>
+        <div id="ready_to_eat">
+
+            {{#each burgers}}
+            {{#unless devoured}}
+            <form action="api/burgers/{{id}}" method="POST">
+                <div class="input-group">
+                    <li class="form-control">{{id}}. {{name}}</li>
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger devour-button" type="submit">Devour It!</button>
+                    </span>
+                </div>
+            </form>
+            {{/unless}}
+            {{/each}}
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+
+    <!-- Right side (already eaten) -->
+    <div class="col-md-3">
+        <h4 class="red-text">Already eaten!</h4>
+        <div id="already_eaten">
+
+            <!-- Dynamically Insert Eaten Burgers Here -->
+            {{#each burgers}}
+            {{#if this.devoured}}
+            <div class="input-group eaten">
+                <li class="form-control eaten-burgers">{{this.id}}. {{this.name}}</li>
+            </div>
+            {{/if}}
+            {{/each}}
+
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 form">
+        <h2 class="red-text">Add a Burger</h2>
+        <form class="create-form center">
+
+            <div class="form-group">
+                <label for="burger">Burger Name:</label>
+                <br>
+                <input type="text" id="burger" name="name">
+            </div>
+
+            <button id="submit-button" type="submit" class="btn btn-danger">Add Burger</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
